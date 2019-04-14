@@ -5,7 +5,8 @@ programmet kommer åsta komma detta genom objektorienterad programmering och kom
 
 
 * ~~Skapa GUI~~
-* ~~Skapa event listeners~~
+* ~~Skapa alla klasser för projektet utefter en UML~~
+* ~~Skapa event com.sqlcom.MainGui.listeners~~
 * Skriva grundläggande databas kommunikation
 * Skriva grundläggande databas IO
 * Skapa databas objekt för att lagra databas uppgifter
