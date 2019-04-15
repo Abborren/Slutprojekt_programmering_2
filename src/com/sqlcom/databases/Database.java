@@ -1,7 +1,7 @@
 package com.sqlcom.databases;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -112,22 +112,54 @@ public abstract class Database {
     }
 
     /**
-     * This fetches the result of a stmt as a HashMap array.
+     * This loops through a input Resultset and convert it to a
+     * HashMap array.
      *
-     * @param stmt the statement (Might be changed to a ResultSet)
-     * @return returns a hashmap array of strings with the result values
+     * @param rs a result of a query.
+     * @return returns a hashmap array list of strings with the result values
+     * @throws SQLException this will get thrown if anything with connecting to the database goes wrong.
      */
-    public HashMap<String, String>[] fetch(final String stmt) {
-        throw new UnsupportedOperationException();
+    private ArrayList<HashMap<String, String>> fetch(final ResultSet rs) throws SQLException {
+        ArrayList<HashMap<String, String>> returnsArr = new ArrayList<>();
+        while (rs.next()) {
+            ResultSetMetaData metadata = rs.getMetaData();
+            int columnCount = metadata.getColumnCount();
+
+            HashMap<String, String> hashMap = new HashMap<>();
+            for (int i = 0; i < columnCount; i++) {
+                String name = metadata.getColumnName(i + 1);
+                hashMap.put(name, rs.getString(name));
+            }
+            returnsArr.add(hashMap);
+        }
+        // This returns a hashmap arraylist with one index with a key of "200",
+        // will get casted incase the database dosen't give a result.
+        if (returnsArr.size() == 0) {
+            HashMap<String, String> stringHashMap = new HashMap<>();
+            stringHashMap.put("200", "The query did not return a result but query ran successfully");
+            ArrayList<HashMap<String, String>> maps = new ArrayList<>();
+            maps.add(stringHashMap);
+            return maps;
+        }
+        return returnsArr;
     }
 
     /**
      * This will execute a string sql query.
      *
-     * @param stmt the query
+     * @param stmt an SQL statement to be sent to the database, typically a
+     *             static SQL <code>SELECT</code> statement
+     * @return returns a hashmap array list with the results of the queries. null if it fails or there is no result.
+     * if the query does not return any data it returns a hashmap array with one hashmap index containing a key set called "200"
      */
-    public void execute(final String stmt) {
-
+    public ArrayList<HashMap<String, String>> execute(final String stmt) {
+        try {
+            Statement statement = connection.createStatement();
+            return fetch(statement.executeQuery(stmt));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /* Setter and Getter section */
