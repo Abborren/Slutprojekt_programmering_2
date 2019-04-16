@@ -3,7 +3,9 @@ package com.sqlcom.MainGui;
 import com.sqlcom.FileUtil;
 import com.sqlcom.MainGui.listeners.*;
 import com.sqlcom.databases.Database;
+import com.sqlcom.databases.DatabaseMYSQL;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -21,6 +23,11 @@ public class Controller {
     private ArrayList<Database> databaseList;
 
     /**
+     * This is the active database connection.
+     */
+    private Database activeDBConn;
+
+    /**
      * Constructor for making the controller object.
      *
      * @param gui The gui.
@@ -29,7 +36,18 @@ public class Controller {
         this.gui = gui;
         createEventListeners();
         new SyncEventListener(this);
-        databaseList = FileUtil.loadDatabases();
+        //databaseList = FileUtil.loadDatabases();
+        try {
+            activeDBConn = new DatabaseMYSQL(
+                    "slutprojekt",
+                    "IPADDRESS",
+                    "PORT",
+                    "USERNAME",
+                    "PASSWORD"
+            );
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -62,5 +80,19 @@ public class Controller {
      */
     public Gui getGui() {
         return gui;
+    }
+
+    /**
+     * @return the active database connection.
+     */
+    public Database getActiveDBConn() {
+        return activeDBConn;
+    }
+
+    /**
+     * @param activeDBConn the new active database connection.
+     */
+    public void setActiveDBConn(final Database activeDBConn) {
+        this.activeDBConn = activeDBConn;
     }
 }

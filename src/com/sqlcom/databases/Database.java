@@ -112,54 +112,39 @@ public abstract class Database {
     }
 
     /**
-     * This loops through a input Resultset and convert it to a
-     * HashMap array.
-     *
-     * @param rs a result of a query.
-     * @return returns a hashmap array list of strings with the result values
-     * @throws SQLException this will get thrown if anything with connecting to the database goes wrong.
-     */
-    private ArrayList<HashMap<String, String>> fetch(final ResultSet rs) throws SQLException {
-        ArrayList<HashMap<String, String>> returnsArr = new ArrayList<>();
-        while (rs.next()) {
-            ResultSetMetaData metadata = rs.getMetaData();
-            int columnCount = metadata.getColumnCount();
-
-            HashMap<String, String> hashMap = new HashMap<>();
-            for (int i = 0; i < columnCount; i++) {
-                String name = metadata.getColumnName(i + 1);
-                hashMap.put(name, rs.getString(name));
-            }
-            returnsArr.add(hashMap);
-        }
-        // This returns a hashmap arraylist with one index with a key of "200",
-        // will get casted incase the database dosen't give a result.
-        if (returnsArr.size() == 0) {
-            HashMap<String, String> stringHashMap = new HashMap<>();
-            stringHashMap.put("200", "The query did not return a result but query ran successfully");
-            ArrayList<HashMap<String, String>> maps = new ArrayList<>();
-            maps.add(stringHashMap);
-            return maps;
-        }
-        return returnsArr;
-    }
-
-    /**
      * This will execute a string sql query.
      *
      * @param stmt an SQL statement to be sent to the database, typically a
      *             static SQL <code>SELECT</code> statement
+     *             Javadoc borrowed from the JDBC api under the GPL license.
      * @return returns a hashmap array list with the results of the queries. null if it fails or there is no result.
      * if the query does not return any data it returns a hashmap array with one hashmap index containing a key set called "200"
+     * @throws SQLException this will get thrown if anything with connecting to the database goes wrong.
      */
-    public ArrayList<HashMap<String, String>> execute(final String stmt) {
-        try {
-            Statement statement = connection.createStatement();
-            return fetch(statement.executeQuery(stmt));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public ResultSet execute(final String stmt) throws SQLException {
+        return connection.createStatement().executeQuery(stmt);
+    }
+
+    /**
+     * Executes the given SQL statement, which may be an <code>INSERT</code>,
+     * <code>UPDATE</code>, or <code>DELETE</code> statement or an
+     * SQL statement that returns nothing, such as an SQL DDL statement.
+     * <p>
+     * <strong>Note:</strong>This method cannot be called on a
+     * <code>PreparedStatement</code> or <code>CallableStatement</code>.
+     * Javadoc borrowed from the JDBC api under the GPL license.
+     *
+     * @param stmt SQL statement, such as <code>INSERT</code>, <code>UPDATE</code> or
+     *             <code>DELETE</code>; or an SQL statement that returns nothing.
+     * @return either (1) the row count for SQL Data Manipulation Language (DML) statements
+     * or (2) 0 for SQL statements that return nothing
+     * @throws SQLException if a database access error occurs,
+     *                      this method is called on a closed <code>Statement</code>, the given
+     *                      SQL statement produces a <code>ResultSet</code> object, the method is called on a
+     *                      <code>PreparedStatement</code> or <code>CallableStatement</code>
+     */
+    public int executeUpdate(final String stmt) throws SQLException {
+        return connection.createStatement().executeUpdate(stmt);
     }
 
     /* Setter and Getter section */
@@ -239,11 +224,15 @@ public abstract class Database {
         tryUpdateDbConnection();
     }
 
+    public Connection getConnection() {
+        return connection;
+    }
+
     /**
      * @param connection new dbName connection.
      */
     public void setConnection(final Connection connection) {
         this.connection = connection;
-        tryUpdateDbConnection();
+        //tryUpdateDbConnection();
     }
 }

@@ -1,5 +1,7 @@
 package com.sqlcom.MainGui;
 
+import com.sqlcom.utilities.TextLineNumber;
+
 import javax.swing.*;
 
 /**
@@ -49,10 +51,16 @@ public class Gui {
      * The IO button to clear the output text area.
      */
     private JButton clearOutputButton;
+
     /**
-     * The output text area.
+     * The output text pane.
      */
-    private JTextArea outputArea;
+    private JTextPane outputTextPane;
+
+    /**
+     * The input scroll pane.
+     */
+    private JScrollPane inputScrollPane;
 
     /**
      * Constructor for making the Gui object.
@@ -65,6 +73,9 @@ public class Gui {
 
         frame.setContentPane(tabbedPane);
         frame.setVisible(true);
+
+        //creates as line number for each row written.
+        inputScrollPane.setRowHeaderView(new TextLineNumber(inputArea));
 
         ButtonGroup buttonGroup = new ButtonGroup();
         buttonGroup.add(syncRadioButton);
@@ -125,8 +136,8 @@ public class Gui {
     /**
      * @return The output JText area component.
      */
-    public JTextArea getOutputArea() {
-        return outputArea;
+    public JTextPane getOutputTextPane() {
+        return outputTextPane;
     }
 
     /**
@@ -135,4 +146,5 @@ public class Gui {
     public JButton getRun() {
         return run;
     }
+
 }

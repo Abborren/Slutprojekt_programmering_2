@@ -6,13 +6,14 @@ programmet kommer åsta komma detta genom objektorienterad programmering och kom
 
 * ~~Skapa GUI~~
 * ~~Skapa alla klasser för projektet utefter en UML~~
-* ~~Skapa event com.sqlcom.MainGui.listeners~~
-* Skriva grundläggande databas kommunikation
-* Skriva grundläggande databas IO
-* Skapa databas objekt för att lagra databas uppgifter
-* Möjliggöra databas CRUD genom en input
+* ~~Skapa event listeners~~
+* ~~Skriva grundläggande databas kommunikation~~
+* ~~Skriva grundläggande databas IO~~
+* ~~Skapa databas objekt för att lagra databas uppgifter~~
+* ~~Möjliggöra databas CRUD genom en input~~
 * Förbättra programmet
-* Skapa en bra designad output dialog
+* ~~Skapa en bra designad output dialog~~
 * Skapa system för att lokalt lagra databas data mellan program start
+* Skapa system för att möjligöra att byta mellan olika databaser
 * Skriva färdigt programmet
 * Skriva dokumentation

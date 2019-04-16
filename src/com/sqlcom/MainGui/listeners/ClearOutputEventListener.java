@@ -31,7 +31,7 @@ public class ClearOutputEventListener implements ActionListener {
      */
     @Override
     public void actionPerformed(final ActionEvent e) {
-        throw new UnsupportedOperationException();
+        controller.getGui().getOutputTextPane().setText("");
     }
 
 }

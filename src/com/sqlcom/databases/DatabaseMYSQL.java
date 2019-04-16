@@ -34,8 +34,8 @@ public class DatabaseMYSQL extends Database {
      */
     @Override
     public void updateDbConnection() throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.jdbc.Driver");
-        String defaultUrl = "jdbc:mysql://" + getDbHost() + "/" + getDbName();
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        String defaultUrl = "jdbc:mysql://" + getDbHost() + "/" + getDbName() + "?serverTimezone=UTC";
         setConnection(DriverManager.getConnection(defaultUrl, super.getDbUsername(), super.getDbPassword()));
     }
 }
