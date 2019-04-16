@@ -52,7 +52,7 @@ public class RunEventListener implements ActionListener {
 
             String stmtKind = stmt.substring(0, stmt.indexOf(" ")).toLowerCase();
             Database database = controller.getActiveDBConn();
-            if (stmtKind.startsWith("select")) {
+            if (stmtKind.startsWith("select") || stmtKind.startsWith("show")) {
                 try {
                     ResultSet result = database.execute(stmt);
                     if (result != null) {
