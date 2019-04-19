@@ -132,10 +132,10 @@ public final class FileUtil {
     }
 
     /**
-     * returns a arraylist of Files with the DBC file extension.
+     * returns a array of Files with the DBC file extension.
      *
      * @param files the input of unverified files
-     * @return a arraylist of dbc files returns null if there are no valid files or input was null
+     * @return a array of dbc files returns null if there are no valid files or input was null
      */
     private static File[] getDBCFiles(final File[] files) {
         if (files != null) {
