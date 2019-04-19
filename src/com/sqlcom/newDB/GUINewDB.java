@@ -3,6 +3,7 @@ package com.sqlcom.newDB;
 import com.sqlcom.MainGui.Controller;
 
 import javax.swing.*;
+import java.util.Random;
 
 /**
  * This is a Gui class that is used to create new Database entries.
@@ -77,5 +78,24 @@ public class GUINewDB {
 
         });
         cancelButton.addActionListener(e -> frame.dispose());
+    }
+
+    /**
+     * This returns a random string with a set amount of characters.
+     *
+     * @param targetLength the specified length of the random string
+     * @return the random string
+     */
+    private static String getRandomString(final int targetLength) {
+        int leftLimit = 97;
+        int rightLimit = 122;
+        Random random = new Random();
+        StringBuilder buffer = new StringBuilder(targetLength);
+        for (int i = 0; i < targetLength; i++) {
+            int randomLimitedInt = leftLimit + (int)
+                    (random.nextFloat() * (rightLimit - leftLimit + 1));
+            buffer.append((char) randomLimitedInt);
+        }
+        return buffer.toString();
     }
 }

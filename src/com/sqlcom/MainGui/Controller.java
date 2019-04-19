@@ -1,11 +1,9 @@
 package com.sqlcom.MainGui;
 
-import com.sqlcom.FileUtil;
 import com.sqlcom.MainGui.listeners.*;
 import com.sqlcom.databases.Database;
-import com.sqlcom.databases.DatabaseMYSQL;
+import com.sqlcom.utilities.FileUtil;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -37,17 +35,8 @@ public class Controller {
         createEventListeners();
         new SyncEventListener(this);
         //databaseList = FileUtil.loadDatabases();
-        try {
-            activeDBConn = new DatabaseMYSQL(
-                    "slutprojekt",
-                    "IPADDRESS",
-                    "PORT",
-                    "USERNAME",
-                    "PASSWORD"
-            );
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
+        ArrayList<Database> databases = FileUtil.loadDatabases();
+        activeDBConn = databases.get(0);
     }
 
     /**

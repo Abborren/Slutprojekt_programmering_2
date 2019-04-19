@@ -13,7 +13,7 @@ programmet kommer åsta komma detta genom objektorienterad programmering och kom
 * ~~Möjliggöra databas CRUD genom en input~~
 * Förbättra programmet
 * ~~Skapa en bra designad output dialog~~
-* Skapa system för att lokalt lagra databas data mellan program start
+* ~~Skapa system för att lokalt lagra databas data mellan program start~~
 * Skapa system för att möjligöra att byta mellan olika databaser
 * Skriva färdigt programmet
 * Skriva dokumentation

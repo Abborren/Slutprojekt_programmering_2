@@ -1,8 +1,8 @@
 package com.sqlcom.databases;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * This abstract Database file is for a generic connection databases.
@@ -35,6 +35,10 @@ public abstract class Database {
     private String dbPassword;
 
     /**
+     * The databases unique id for saving to file.
+     */
+    private String uniqueId;
+    /**
      * The SQL database connection.
      */
     private Connection connection;
@@ -47,13 +51,15 @@ public abstract class Database {
      * @param dbPort     The database url
      * @param dbUsername The database username
      * @param dbPassword The database password
+     * @param uniqueId   The databases unique id
      */
-    public Database(final String dbName, final String dbHost, final String dbPort, final String dbUsername, final String dbPassword) {
+    public Database(final String dbName, final String dbHost, final String dbPort, final String dbUsername, final String dbPassword, final String uniqueId) {
         this.dbName = dbName;
         this.dbHost = dbHost;
         this.dbPort = dbPort;
         this.dbUsername = dbUsername;
         this.dbPassword = dbPassword;
+        this.uniqueId = uniqueId;
     }
 
     /**
@@ -224,15 +230,32 @@ public abstract class Database {
         tryUpdateDbConnection();
     }
 
+    /**
+     * @return the connection.
+     */
     public Connection getConnection() {
         return connection;
     }
 
     /**
-     * @param connection new dbName connection.
+     * @param connection new db connection.
      */
     public void setConnection(final Connection connection) {
         this.connection = connection;
         //tryUpdateDbConnection();
+    }
+
+    /**
+     * @return the unique id (filename).
+     */
+    public String getUniqueId() {
+        return uniqueId;
+    }
+
+    /**
+     * @param uniqueId new unique id.
+     */
+    public void setUniqueId(final String uniqueId) {
+        this.uniqueId = uniqueId;
     }
 }

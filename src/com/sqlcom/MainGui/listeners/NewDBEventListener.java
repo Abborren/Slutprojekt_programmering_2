@@ -34,5 +34,4 @@ public class NewDBEventListener implements ActionListener {
     public void actionPerformed(final ActionEvent e) {
         new GUINewDB(controller);
     }
-
 }
