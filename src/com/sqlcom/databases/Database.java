@@ -82,42 +82,6 @@ public abstract class Database {
     }
 
     /**
-     * This connects to the database.
-     *
-     * @return returns true if the connection is successful
-     */
-    public boolean connect() {
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * This disconnects the database connection.
-     *
-     * @return true if connection is closed successfully
-     */
-    public boolean disconnect() {
-        try {
-            connection.close();
-            return connection.isClosed();
-        } catch (SQLException e) {
-            return false;
-        }
-    }
-
-    /**
-     * This returns the current databases connection status.
-     *
-     * @return true if the connection is valid else false
-     */
-    public boolean status() {
-        try {
-            return connection.isValid(5);
-        } catch (SQLException e) {
-            return false;
-        }
-    }
-
-    /**
      * This will execute a string sql query.
      *
      * @param stmt an SQL statement to be sent to the database, typically a
@@ -242,7 +206,6 @@ public abstract class Database {
      */
     public void setConnection(final Connection connection) {
         this.connection = connection;
-        //tryUpdateDbConnection();
     }
 
     /**
@@ -258,4 +221,15 @@ public abstract class Database {
     public void setUniqueId(final String uniqueId) {
         this.uniqueId = uniqueId;
     }
+
+    /**
+     * Overrides <code>toString</code> method to enable use in comboBoxes.
+     *
+     * @return The db name and host url
+     */
+    @Override
+    public String toString() {
+        return getDbName() + ", " + getDbHost();
+    }
 }
+

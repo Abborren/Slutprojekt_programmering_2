@@ -17,14 +17,11 @@ public class DatabaseMYSQL extends Database {
      * @param dbUsername The database username
      * @param dbPassword The database password
      * @param dbUniqueId The database unique id
-     * @throws ClassNotFoundException This will get thrown if the mysql driver is missing.
-     * @throws SQLException           this will get thrown if anything with connecting to the database goes wrong.
      */
     public DatabaseMYSQL(final String dbName, final String dbHost, final String dbPort,
-                         final String dbUsername, final String dbPassword, final String dbUniqueId) throws ClassNotFoundException, SQLException {
+                         final String dbUsername, final String dbPassword, final String dbUniqueId) {
 
         super(dbName, dbHost, dbPort, dbUsername, dbPassword, dbUniqueId);
-        updateDbConnection();
     }
 
     /**

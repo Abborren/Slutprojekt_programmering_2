@@ -35,8 +35,12 @@ public class Controller {
         createEventListeners();
         new SyncEventListener(this);
         //databaseList = FileUtil.loadDatabases();
-        ArrayList<Database> databases = FileUtil.loadDatabases();
-        activeDBConn = databases.get(0);
+        databaseList = FileUtil.loadDatabases();
+        activeDBConn = databaseList.get(0);
+
+        for (Database db : databaseList) {
+            gui.getdBComboBox().addItem(db);
+        }
     }
 
     /**

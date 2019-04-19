@@ -33,7 +33,9 @@ public class StopEventListener implements ActionListener {
      */
     @Override
     public void actionPerformed(final ActionEvent e) {
-        throw new UnsupportedOperationException();
+        controller.getGui().getRun().setEnabled(false);
+        controller.getGui().getdBComboBox().setEnabled(true);
+
     }
 
 }
