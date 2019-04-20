@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 /**
  * This is a actionListener for the ComboBox that holds the active db connection.
+ * TODO maybe repurpose this event listener for the table otherwise delete since its not needed / used.
  */
 public class DbComboBoxEventListener implements ActionListener {
 
@@ -31,7 +32,7 @@ public class DbComboBoxEventListener implements ActionListener {
      */
     @Override
     public void actionPerformed(final ActionEvent e) {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
     }
 
 }

@@ -4,6 +4,7 @@ import com.sqlcom.MainGui.listeners.*;
 import com.sqlcom.databases.Database;
 import com.sqlcom.utilities.FileUtil;
 
+import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
 /**
@@ -33,13 +34,19 @@ public class Controller {
     public Controller(final Gui gui) {
         this.gui = gui;
         createEventListeners();
-        new SyncEventListener(this);
-        //databaseList = FileUtil.loadDatabases();
+
         databaseList = FileUtil.loadDatabases();
         activeDBConn = databaseList.get(0);
 
+        // Sets JTables column names
+        DefaultTableModel model = (DefaultTableModel) gui.getDatabaseTable().getModel();
+        model.setColumnIdentifiers(new Object[] {"Type", "Host", "Db Name", "Username", "Password"});
+
         for (Database db : databaseList) {
-            gui.getdBComboBox().addItem(db);
+            // Adds dbs to comboBox.
+            gui.getDbComboBox().addItem(db);
+            // Adds dbs to JTable.
+            model.addRow(db.toRow());
         }
     }
 
@@ -56,9 +63,11 @@ public class Controller {
         gui.getSyncRadioButton().addActionListener(new SyncEventListener(this));
         gui.getStopRadioButton().addActionListener(new StopEventListener(this));
 
-        gui.getNewDB().addActionListener(new NewDBEventListener(this));
+        gui.getNewDb().addActionListener(new NewDBEventListener(this));
 
-        gui.getdBComboBox().addActionListener(new DbComboBoxEventListener(this));
+        gui.getDbComboBox().addActionListener(new DbComboBoxEventListener(this));
+
+        //TODO create a event listener for the table that updates the Database list if a change is detected on a table row.
     }
 
     /**

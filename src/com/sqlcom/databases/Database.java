@@ -231,5 +231,17 @@ public abstract class Database {
     public String toString() {
         return getDbName() + ", " + getDbHost();
     }
+
+    /**
+     * Returns a object array with string data of the database for adding to a JTable.
+     *
+     * @return a object array with strings
+     */
+    public Object[] toRow() {
+        String dbType = this.getClass().getSimpleName().replace("Database", "");
+        dbType = dbType.substring(0, 1) + dbType.substring(1).toLowerCase();
+
+        return new Object[] {dbType, getDbHost(), getDbName(), getDbUsername(), getDbPassword(), getUniqueId()};
+    }
 }
 

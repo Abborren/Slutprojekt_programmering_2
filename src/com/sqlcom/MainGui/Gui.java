@@ -26,7 +26,7 @@ public class Gui {
     /**
      * The DB button to create a new database.
      */
-    private JButton newDB;
+    private JButton newDb;
 
     /**
      * The DB ComboBox to select the active database connection.
@@ -92,16 +92,16 @@ public class Gui {
     }
 
     /**
-     * @return The newDB Button component.
+     * @return The newDb Button component.
      */
-    public JButton getNewDB() {
-        return newDB;
+    public JButton getNewDb() {
+        return newDb;
     }
 
     /**
-     * @return The dBComboBox component.
+     * @return The dbComboBox component.
      */
-    public JComboBox getdBComboBox() {
+    public JComboBox getDbComboBox() {
         return dBComboBox;
     }
 
@@ -146,5 +146,4 @@ public class Gui {
     public JButton getRun() {
         return run;
     }
-
 }

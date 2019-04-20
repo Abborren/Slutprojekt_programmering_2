@@ -7,7 +7,6 @@ import com.sqlcom.databases.Database;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
@@ -37,13 +36,12 @@ public class SyncEventListener implements ActionListener {
     public void actionPerformed(final ActionEvent e) {
         Gui gui = controller.getGui();
         gui.getRun().setEnabled(true);
-        controller.setActiveDBConn((Database) gui.getdBComboBox().getSelectedItem());
+        controller.setActiveDBConn((Database) gui.getDbComboBox().getSelectedItem());
         try {
             controller.getActiveDBConn().updateDbConnection();
         } catch (SQLException | ClassNotFoundException e1) {
             e1.printStackTrace();
         }
-
-        gui.getdBComboBox().setEnabled(false);
+        gui.getDbComboBox().setEnabled(false);
     }
 }

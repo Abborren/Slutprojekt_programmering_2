@@ -27,14 +27,13 @@ public class StopEventListener implements ActionListener {
 
     /**
      * The action performed listener.
-     * TODO enable comboBox if a connection is inactive.
      *
      * @param e the action
      */
     @Override
     public void actionPerformed(final ActionEvent e) {
         controller.getGui().getRun().setEnabled(false);
-        controller.getGui().getdBComboBox().setEnabled(true);
+        controller.getGui().getDbComboBox().setEnabled(true);
 
     }
 
