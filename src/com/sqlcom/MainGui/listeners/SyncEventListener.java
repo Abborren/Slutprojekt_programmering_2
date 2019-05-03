@@ -36,7 +36,13 @@ public class SyncEventListener implements ActionListener {
     public void actionPerformed(final ActionEvent e) {
         Gui gui = controller.getGui();
         gui.getRun().setEnabled(true);
-        controller.setActiveDBConn((Database) gui.getDbComboBox().getSelectedItem());
+        for (Database database: controller.getDatabaseList()) {
+            if (gui.getDbComboBox().getSelectedItem().toString().equals(database.toString())) {
+                controller.setActiveDBConn(database);
+                break;
+            }
+        }
+
         try {
             controller.getActiveDBConn().updateDbConnection();
         } catch (SQLException | ClassNotFoundException e1) {

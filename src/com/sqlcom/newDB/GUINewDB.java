@@ -1,8 +1,14 @@
 package com.sqlcom.newDB;
 
 import com.sqlcom.MainGui.Controller;
+import com.sqlcom.databases.Database;
+import com.sqlcom.databases.DatabaseMYSQL;
+import com.sqlcom.utilities.FileUtil;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.io.File;
+import java.sql.SQLException;
 import java.util.Random;
 
 /**
@@ -66,6 +72,8 @@ public class GUINewDB {
 
         this.controller = controller;
 
+        dbTypeComboBox.addItem(Controller.formatDbClassName(DatabaseMYSQL.class));
+
         JFrame frame = new JFrame("Database hantering");
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -73,11 +81,56 @@ public class GUINewDB {
 
         frame.setContentPane(jPanel);
         frame.setVisible(true);
-
         okButton.addActionListener(e -> {
 
+            runAction();
+            frame.dispose();
         });
         cancelButton.addActionListener(e -> frame.dispose());
+    }
+
+    /**
+     * @return this casts the input combobox to a database type (full database class name).
+     */
+    private String getDbType() {
+        String s = dbTypeComboBox.getSelectedItem().toString();
+        switch (s) {
+            case "Mysql":
+                return "DatabaseMYSQL";
+            case "SQLLITE":
+                return "DatabaseMYSQL";
+            default:
+                return "null";
+        }
+    }
+
+    /**
+     * This is the action that is run on the okay click button.
+     * Creates a database from the inputed data.
+     */
+    private void runAction() {
+        String[] array = {
+                "TYPE=" + getDbType(),
+                "NAME=" + dbName.getText(),
+                "HOST=" + dbHost.getText(),
+                "PORT=" + dbPort.getText(),
+                "USERNAME=" + dbUsername.getText(),
+                "PASSWORD=" + dbPassword.getText(),
+        };
+        try {
+            Database database = FileUtil.createDatabaseFromStrings(array, getDbType(), getRandomString(20));
+            if (database != null) {
+                controller.getGui().getDbComboBox().addItem(database.toString());
+
+                DefaultTableModel model = (DefaultTableModel) controller.getGui().getDatabaseTable().getModel();
+                model.addRow(database.toRow());
+
+                controller.getDatabaseList().add(database);
+                FileUtil.saveDatabase(controller.getDatabaseList());
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

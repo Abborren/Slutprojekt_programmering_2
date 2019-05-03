@@ -42,7 +42,7 @@ public class Controller {
 
         // Sets JTables column names
         DefaultTableModel model = (DefaultTableModel) gui.getDatabaseTable().getModel();
-        model.setColumnIdentifiers(new Object[] {"Type", "Host", "Db Name", "Username", "Password", "Delete"});
+        model.setColumnIdentifiers(new Object[] {"Type", "Host", "Db Name", "Username", "Password", "Filename"});
 
         //creates a dropdown menu in the database type field.
         JComboBox comboBox = new JComboBox<>(new String[] {formatDbClassName(DatabaseMYSQL.class)});
@@ -61,7 +61,7 @@ public class Controller {
      * @param database
      * @return String name
      */
-    private static String formatDbClassName(Class database) {
+    public static String formatDbClassName(Class database) {
         String dbType = database.getSimpleName().replace("Database", "");
         return dbType.substring(0, 1) + dbType.substring(1).toLowerCase();
     }

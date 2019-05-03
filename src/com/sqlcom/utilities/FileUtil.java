@@ -162,7 +162,7 @@ public final class FileUtil {
      * @throws ClassNotFoundException gets thrown if the database class is not found
      * @throws SQLException           gets thrown if credentials are incorrect
      */
-    private static Database createDatabaseFromStrings(final String[] stringArray, final String classType, final String uniqueId)
+    public static Database createDatabaseFromStrings(final String[] stringArray, final String classType, final String uniqueId)
             throws ClassNotFoundException, SQLException {
         if (classType.equalsIgnoreCase("DatabaseMYSQL")) {
             return new DatabaseMYSQL(

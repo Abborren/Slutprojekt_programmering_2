@@ -241,7 +241,7 @@ public abstract class Database {
         String dbType = this.getClass().getSimpleName().replace("Database", "");
         dbType = dbType.substring(0, 1) + dbType.substring(1).toLowerCase();
 
-        return new Object[] {dbType, getDbHost(), getDbName(), getDbUsername(), getDbPassword(),"", getUniqueId()};
+        return new Object[] {dbType, getDbHost(), getDbName(), getDbUsername(), getDbPassword(), getUniqueId()};
     }
 }
 
