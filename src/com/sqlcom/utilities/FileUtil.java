@@ -2,6 +2,7 @@ package com.sqlcom.utilities;
 
 import com.sqlcom.databases.Database;
 import com.sqlcom.databases.DatabaseMYSQL;
+import com.sqlcom.databases.DatabaseSQLITE;
 
 import javax.swing.*;
 import java.io.*;
@@ -51,7 +52,7 @@ public final class FileUtil {
      */
     private static void parseToFile(final Database database) {
         String dbFileName = database.getUniqueId();
-        File[] dbcFiles = getFiles("\\Databases");
+        File[] dbcFiles = getFiles("/Databases");
         dbcFiles = getDBCFiles(dbcFiles);
 
         if (dbcFiles != null) {
@@ -66,7 +67,7 @@ public final class FileUtil {
                 }
             }
         }
-        String dbDirectory = getAppFolderDirectory() + "\\Databases\\";
+        String dbDirectory = getAppFolderDirectory() + "/Databases/";
         File file = new File(dbDirectory + dbFileName + ".dbc");
         try {
             file.createNewFile();
@@ -100,7 +101,7 @@ public final class FileUtil {
      * @return returns a array of database objects
      */
     private static ArrayList<Database> parseFromFile() {
-        File[] files = getFiles("\\Databases");
+        File[] files = getFiles("/Databases");
         if (files != null) {
             return createDatabasesFromFile(getDBCFiles(files));
         }
@@ -173,8 +174,15 @@ public final class FileUtil {
                     stringArrayLookup("PASSWORD", stringArray),
                     uniqueId
             );
-        } else if (classType.equalsIgnoreCase("somethin else")) {
-            //cast other stuff
+        } else if (classType.equalsIgnoreCase("DatabaseSQLITE")) {
+            return new DatabaseSQLITE(
+                    stringArrayLookup("NAME", stringArray),
+                    stringArrayLookup("HOST", stringArray),
+                    stringArrayLookup("PORT", stringArray),
+                    stringArrayLookup("USERNAME", stringArray),
+                    stringArrayLookup("PASSWORD", stringArray),
+                    uniqueId
+            );
             //TODO Add further class types when other database types have been added.
         }
         return null;
@@ -266,6 +274,6 @@ public final class FileUtil {
      * @return This gets the my documents folder and the database handlers data subfolder.
      */
     private static String getAppFolderDirectory() {
-        return new JFileChooser().getFileSystemView().getDefaultDirectory().toString() + "\\Database Handler";
+        return new JFileChooser().getFileSystemView().getDefaultDirectory().toString() + "/Database Handler";
     }
 }
