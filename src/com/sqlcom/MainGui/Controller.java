@@ -42,7 +42,14 @@ public class Controller {
 
         // Sets JTables column names
         DefaultTableModel model = (DefaultTableModel) gui.getDatabaseTable().getModel();
-        model.setColumnIdentifiers(new Object[] {"Type", "Host", "Db Name", "Username", "Password", "Filename"});
+        model.setColumnIdentifiers(new Object[] {"Type", "Host", "Db Name", "Username", "Password", "uniqueid"});
+        //Hides the unique id field.
+        gui.getDatabaseTable().getColumnModel().getColumn(5).setMinWidth(0);
+        gui.getDatabaseTable().getColumnModel().getColumn(5).setMaxWidth(0);
+        gui.getDatabaseTable().getColumnModel().getColumn(5).setWidth(0);
+
+        //Adds event listener that triggers on edits.
+        model.addTableModelListener(new TableModelEventListener(this));
 
         //creates a dropdown menu in the database type field.
         JComboBox comboBox = new JComboBox<>(new String[] {formatDbClassName(DatabaseMYSQL.class)});

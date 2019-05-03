@@ -131,7 +131,6 @@ public abstract class Database {
      */
     public void setDbName(final String dbName) {
         this.dbName = dbName;
-        tryUpdateDbConnection();
     }
 
     /**
@@ -146,7 +145,6 @@ public abstract class Database {
      */
     public void setDbHost(final String dbHost) {
         this.dbHost = dbHost;
-        tryUpdateDbConnection();
     }
 
     /**
@@ -161,7 +159,6 @@ public abstract class Database {
      */
     public void setDbPort(final String dbPort) {
         this.dbPort = dbPort;
-        tryUpdateDbConnection();
     }
 
     /**
@@ -176,7 +173,6 @@ public abstract class Database {
      */
     public void setDbUsername(final String dbUsername) {
         this.dbUsername = dbUsername;
-        tryUpdateDbConnection();
     }
 
     /**
@@ -191,7 +187,6 @@ public abstract class Database {
      */
     public void setDbPassword(final String dbPassword) {
         this.dbPassword = dbPassword;
-        tryUpdateDbConnection();
     }
 
     /**

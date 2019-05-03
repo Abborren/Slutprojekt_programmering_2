@@ -19,6 +19,6 @@ Roadmap
 * ~~Skapa system för att lokalt lagra databas data mellan program start~~
 * ~~Skapa system för att möjligöra att byta mellan olika databaser~~
 * ~~Skapa ett system för att lägga till nya databaser~~
-* Skapa system för att kunna redigera databaser i programmet
+* ~~Skapa system för att kunna redigera databaser i programmet~~
 * Skriva färdigt programmet
 * Skriva dokumentation
