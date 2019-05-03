@@ -2,7 +2,6 @@ package com.sqlcom.utilities;
 
 import com.sqlcom.databases.Database;
 import com.sqlcom.databases.DatabaseMYSQL;
-import com.sqlcom.databases.DatabaseSQLITE;
 
 import javax.swing.*;
 import java.io.*;
@@ -174,17 +173,8 @@ public final class FileUtil {
                     stringArrayLookup("PASSWORD", stringArray),
                     uniqueId
             );
-        } else if (classType.equalsIgnoreCase("DatabaseSQLITE")) {
-            return new DatabaseSQLITE(
-                    stringArrayLookup("NAME", stringArray),
-                    stringArrayLookup("HOST", stringArray),
-                    stringArrayLookup("PORT", stringArray),
-                    stringArrayLookup("USERNAME", stringArray),
-                    stringArrayLookup("PASSWORD", stringArray),
-                    uniqueId
-            );
-            //TODO Add further class types when other database types have been added.
         }
+        //TODO Add further class types when other database types have been added.
         return null;
     }
 
