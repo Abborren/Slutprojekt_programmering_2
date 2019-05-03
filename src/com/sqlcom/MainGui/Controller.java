@@ -2,8 +2,10 @@ package com.sqlcom.MainGui;
 
 import com.sqlcom.MainGui.listeners.*;
 import com.sqlcom.databases.Database;
+import com.sqlcom.databases.DatabaseMYSQL;
 import com.sqlcom.utilities.FileUtil;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
@@ -40,7 +42,11 @@ public class Controller {
 
         // Sets JTables column names
         DefaultTableModel model = (DefaultTableModel) gui.getDatabaseTable().getModel();
-        model.setColumnIdentifiers(new Object[] {"Type", "Host", "Db Name", "Username", "Password"});
+        model.setColumnIdentifiers(new Object[] {"Type", "Host", "Db Name", "Username", "Password", "Delete"});
+
+        //creates a dropdown menu in the database type field.
+        JComboBox comboBox = new JComboBox<>(new String[] {formatDbClassName(DatabaseMYSQL.class)});
+        gui.getDatabaseTable().getColumn("Type").setCellEditor(new DefaultCellEditor(comboBox));
 
         for (Database db : databaseList) {
             // Adds dbs to comboBox.
@@ -48,6 +54,16 @@ public class Controller {
             // Adds dbs to JTable.
             model.addRow(db.toRow());
         }
+    }
+
+    /**
+     * Formats the class name of a database to give the actual name
+     * @param database
+     * @return String name
+     */
+    private static String formatDbClassName(Class database) {
+        String dbType = database.getSimpleName().replace("Database", "");
+        return dbType.substring(0, 1) + dbType.substring(1).toLowerCase();
     }
 
     /**
@@ -66,7 +82,6 @@ public class Controller {
         gui.getNewDb().addActionListener(new NewDBEventListener(this));
 
         gui.getDbComboBox().addActionListener(new DbComboBoxEventListener(this));
-
         //TODO create a event listener for the table that updates the Database list if a change is detected on a table row.
     }
 
@@ -96,5 +111,19 @@ public class Controller {
      */
     public void setActiveDBConn(final Database activeDBConn) {
         this.activeDBConn = activeDBConn;
+    }
+
+    /**
+     * This appends html content to the output pane.
+     *
+     * @param text the text to append.
+     */
+    public void appendOutputTextPane(final String text) {
+        JTextPane jTextPane = getGui().getOutputTextPane();
+        jTextPane.setContentType("text/html");
+
+        String content = jTextPane.getText();
+        content = content.substring(content.indexOf("<body>") + 6, content.indexOf("</body>"));
+        jTextPane.setText("<html><head></head><body>" + content + text + "</body></html>");
     }
 }

@@ -40,7 +40,7 @@ public class SyncEventListener implements ActionListener {
         try {
             controller.getActiveDBConn().updateDbConnection();
         } catch (SQLException | ClassNotFoundException e1) {
-            e1.printStackTrace();
+            controller.appendOutputTextPane(e1.getMessage());
         }
         gui.getDbComboBox().setEnabled(false);
     }

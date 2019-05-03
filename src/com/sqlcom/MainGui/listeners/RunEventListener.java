@@ -59,14 +59,14 @@ public class RunEventListener implements ActionListener {
                         printResult(result);
                     }
                 } catch (SQLException e) {
-                    appendOutputTextPane("<p>" + e.getMessage() + "</p>");
+                    controller.appendOutputTextPane("<p>" + e.getMessage() + "</p>");
                 }
             } else {
                 try {
                     int status = database.executeUpdate(stmt);
-                    appendOutputTextPane("<p>Förfrågan slutfördes som förväntat. " + status + " rad(er) påverkade.</p>");
+                    controller.appendOutputTextPane("<p>Förfrågan slutfördes som förväntat. " + status + " rad(er) påverkade.</p>");
                 } catch (SQLException e) {
-                    appendOutputTextPane("<p>" + e.getMessage() + "</p>");
+                    controller.appendOutputTextPane("<p>" + e.getMessage() + "</p>");
 
                 }
             }
@@ -98,20 +98,7 @@ public class RunEventListener implements ActionListener {
             s.append("</tr>\n");
         }
         s.append("</table>");
-        appendOutputTextPane(s.toString());
+        controller.appendOutputTextPane(s.toString());
     }
 
-    /**
-     * This appends html content to the output pane.
-     *
-     * @param text the text to append.
-     */
-    private void appendOutputTextPane(final String text) {
-        JTextPane jTextPane = controller.getGui().getOutputTextPane();
-        jTextPane.setContentType("text/html");
-
-        String content = jTextPane.getText();
-        content = content.substring(content.indexOf("<body>") + 6, content.indexOf("</body>"));
-        jTextPane.setText("<html><head></head><body>" + content + text + "</body></html>");
-    }
 }
