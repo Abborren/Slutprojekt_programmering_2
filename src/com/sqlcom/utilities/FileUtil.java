@@ -214,7 +214,7 @@ public final class FileUtil {
             line = reader.readLine();
         }
         reader.close();
-        return strings.toArray(String[]::new);
+        return strings.toArray(new String[0]);
     }
 
     /**
