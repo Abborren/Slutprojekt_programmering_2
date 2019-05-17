@@ -28,7 +28,7 @@ public class TableModelEventListener implements TableModelListener {
             int column = e.getColumn();
             int row = e.getFirstRow();
             //gets the vector containing the table row data.
-            Vector rowData = ((DefaultTableModel) e.getSource()).getDataVector().get(row);
+            Vector rowData = (Vector) ((DefaultTableModel) e.getSource()).getDataVector().get(row);
             //Gets the old database entry that is going to be edited.
             Database oldDatabase = getDatabase((String) rowData.get(5), true);
             //the data of the edited column.

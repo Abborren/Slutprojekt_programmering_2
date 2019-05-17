@@ -255,7 +255,7 @@ public final class FileUtil {
             return true;
         }
         if (create) {
-            file.mkdir();
+            file.mkdirs();
         }
         return false;
     }

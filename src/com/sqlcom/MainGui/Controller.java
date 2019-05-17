@@ -37,8 +37,14 @@ public class Controller {
         this.gui = gui;
         createEventListeners();
 
-        databaseList = FileUtil.loadDatabases();
-        activeDBConn = databaseList.get(0);
+
+        try {
+            databaseList = FileUtil.loadDatabases();
+            activeDBConn = databaseList.get(0);
+        } catch (NullPointerException e) {
+            databaseList = new ArrayList<>();
+        }
+
 
         // Sets JTables column names
         DefaultTableModel model = (DefaultTableModel) gui.getDatabaseTable().getModel();

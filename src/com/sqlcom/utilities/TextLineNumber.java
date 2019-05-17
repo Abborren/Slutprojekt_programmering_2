@@ -231,8 +231,8 @@ public class TextLineNumber extends JPanel
         //  Determine the rows to draw within the clipped bounds.
 
         Rectangle clip = g.getClipBounds();
-        int rowStartOffset = component.viewToModel2D(new Point(0, clip.y));
-        int endOffset = component.viewToModel2D(new Point(0, clip.y + clip.height));
+        int rowStartOffset = component.viewToModel(new Point(0, clip.y));
+        int endOffset = component.viewToModel(new Point(0, clip.y + clip.height));
 
         while (rowStartOffset <= endOffset) {
             try {
@@ -305,7 +305,7 @@ public class TextLineNumber extends JPanel
             throws BadLocationException {
         //  Get the bounding rectangle of the row
 
-        Rectangle2D r = component.modelToView2D(rowStartOffset);
+        Rectangle2D r = component.modelToView(rowStartOffset);
         int lineHeight = fontMetrics.getHeight();
         double y = r.getY() + r.getHeight();
         int descent = 0;
@@ -396,7 +396,7 @@ public class TextLineNumber extends JPanel
         SwingUtilities.invokeLater(() -> {
             try {
                 int endPos = component.getDocument().getLength();
-                Rectangle2D rect = component.modelToView2D(endPos);
+                Rectangle2D rect = component.modelToView(endPos);
 
                 if (rect != null && rect.getY() != lastHeight) {
                     setPreferredWidth();
